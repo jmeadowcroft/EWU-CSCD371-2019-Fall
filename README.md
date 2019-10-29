@@ -21,7 +21,6 @@ The Main method has already been implemented for you. Unless you are doing the e
 
 #### Person
 - Create a new `Person` struct
-- A person has a first and last name
 - `Person` should implement `IEquatable<Person>`
 - Ensure appropriate equality operators are also written
 - Implement a reasonable ToString method
@@ -45,3 +44,5 @@ This class will be responsible for saving and loading our mailbox data.
 ### Extra Credit
 - It can be quite time consuming to create testable objects like the Mailbox class by hand. Use a third party library as part of the unit test to automatically generate these. A popuplar library for this is [Bogus](https://www.nuget.org/packages/Bogus/)
 - The Main method in the Program is fairly un-testable in its current state due to all of the static `Console` methods. Implement an `IConsole` interface, use it in the Main method, and add unit tests for the Main method. You do *not* need to unit test your implementations of `IConsole`.
+- A person has a first and last name
+- The `StreamReader` and `StreamWriter` should be properly disposed of inside of the Load/Save methods.

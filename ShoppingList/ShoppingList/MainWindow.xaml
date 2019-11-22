@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShoppingList"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter"></local:ObjectToVisibilityConverter>
+    </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" Margin="10,10,10,5">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:Item}">
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="10" Visibility="{Binding SelectedItem, Converter={StaticResource ObjectToVisibilityConverter}}">
+            <TextBlock Text="Name" />
+            <TextBox Text="{Binding SelectedItem.Name}" />
+            <TextBlock Text="Description" />
+            <TextBox Text="{Binding SelectedItem.Description}" AcceptsReturn="True" MinLines="10" />
+        </StackPanel>
+
+        <Button Content="New" Command="{Binding NewItemCommand}" Grid.Row="1" Grid.Column="0" Margin="10,5,10,10"/>
     </Grid>
 </Window>
